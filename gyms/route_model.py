@@ -5,7 +5,8 @@ class GradeSystem(BaseModel):
     id: str
     name: str # v-scale, font scale, or any custom scale a gym may have
     description: str | None
-    country_origin: str | None
+    created_at: datetime
+    modified_at: datetime
 
 
 class Grade(BaseModel):
@@ -22,6 +23,7 @@ class Grade(BaseModel):
 
     description: str | None
     created_at: datetime
+    modified_at: datetime
 
 
 class Route(BaseModel):
