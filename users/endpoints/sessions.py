@@ -1,6 +1,6 @@
 from main import app
-from session_model import Session, SessionCreate, SessionUpdate
-from climb_model import Climb
+from users.models.session_model import Session, SessionCreate, SessionUpdate
+from users.models.climb_model import Climb
 
 @app.get("/users/{user_id}/sessions")
 async def get_sessions(user_id: str):
