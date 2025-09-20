@@ -1,0 +1,10 @@
+services:
+  users-microservice:
+    build: './users'
+    ports:
+      - '8001:8000' # local developer accesses port 8001 like http://...:8001, port 8000 is for inside the container where the app lives
+
+  gyms-microservice:
+    build: './gyms'
+    ports:
+      - '8002:8000'
