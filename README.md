@@ -22,17 +22,21 @@ The API Gateway inside of the cluster is responsible for building responses to s
 
 As of now, I am planning on using REST as the communication protocol between microservices. The plan is to use gRPC later on, but my main focus is to learn Kubernetes and Docker so best not to add too many new technologies.<br><br>
 
-<img width="1188" alt="clmb database drawio" src="https://github.com/user-attachments/assets/4c358ab3-9826-472e-a1e3-714ec4a9b031" />
-
-This is the database schema. Still need to add some more things, but for now this is sufficient for an MVP.<br><br>
-
 <img width="555" height="591" alt="clmb interaction drawio" src="https://github.com/user-attachments/assets/56af94be-a71b-4d68-b1b0-2e8337cdc84c" />
 
-This is how I understand the interaction flow of the application to be like.
+This is how I understand the interaction flow of the application to be like.<br><br>
 
-### Setup
+<img width="1188" alt="clmb database drawio" src="https://github.com/user-attachments/assets/4c358ab3-9826-472e-a1e3-714ec4a9b031" />
+
+This is the database schema. Still need to add some more things, but for now this is sufficient for an MVP.
+
+### Setup (without docker-compose)
 
 1. Go to each folder representing a microservice and create a virtual environment: `py -m venv .venv`.
 2. Using separate terminals for each microservice, start their virtual environments: `.venv/Scripts/activate`.
 3. To run each microservice, do
    `uvicorn main:app`. Must have separate terminals for each microservice.
+
+### Setup (with docker-compose)
+
+1. Run `docker compose up --build` inside the project's root directory to build all docker containers and then run them.
