@@ -6,7 +6,8 @@ This is the backend for clmb, an app to keep track of all your climbs!
 
 - Python
 - FastAPI
-- PostgreSQL
+- Protobufs for inter-service communication
+- PostgreSQL (not Supabase so I can work on this project for however long I want)
 - Docker
 - Kubernetes
 
@@ -28,15 +29,61 @@ This is how I understand the interaction flow of the application to be like.<br>
 
 <img width="1188" alt="clmb database drawio" src="https://github.com/user-attachments/assets/4c358ab3-9826-472e-a1e3-714ec4a9b031" />
 
-This is the database schema. Still need to add some more things, but for now this is sufficient for an MVP.
+This is the database schema. Still need to add some more things, but for now this is sufficient for an MVP. Below are the SQL DDL statements used to create the tables:
 
-### Setup (without docker-compose)
+#### Users database
+```
+create table user (
+	id uuid primary key default gen_random_uuid(),
+	email varchar(255) not null,
+	username varchar(64) not null,
+	first_name varchar(64),
+	last_name varchar(128),
+	password varchar(255),
+	google_id varchar(255),
+	created_at timestamptz default now() not null,
+	modified_at timestamptz default now() not null
+)
+
+create table climb (
+	id uuid primary key default gen_random_uuid(),
+	route_id uuid not null,
+	session_id uuid not null,
+	climb_notes text,
+	created_at timestamptz default now() not null,
+	modified_at timestamptz default now() not null
+)
+
+create type mood_level as enum ('terrible', 'bad', 'okay', 'good', 'excellent');
+create type energy_level as enum ('exhausted', 'tired', 'average', 'energetic', 'pumped');
+
+create table session (
+	id uuid primary key default gen_random_uuid(),
+	user_id uuid not null,
+	gym_id uuid not null,
+	name text,
+	start_time timestamptz default now() not null,
+	end_time timestamptz default now(),
+	duration interval not null,
+	session_notes text,
+	mood_rating mood_level,
+	energy_rating energy_level,
+	modified_at timestamptz default now() not null
+)
+```
+
+#### Gyms database
+```
+hi
+```
+
+### Running the project (without docker-compose)
 
 1. Go to each folder representing a microservice and create a virtual environment: `py -m venv .venv`.
 2. Using separate terminals for each microservice, start their virtual environments: `.venv/Scripts/activate`.
 3. To run each microservice, do
    `uvicorn main:app`. Must have separate terminals for each microservice.
 
-### Setup (with docker-compose)
+### Running the project (with docker-compose)
 
 1. Run `docker compose up --build` inside the project's root directory to build all docker containers and then run them.
