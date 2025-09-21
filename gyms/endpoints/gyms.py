@@ -1,18 +1,19 @@
-from main import app
-from fastapi import Query
+from fastapi import APIRouter, Query
 from typing import Optional
 
-@app.get("/gyms/{gym_id}")
+router = APIRouter()
+
+@router.get("/gyms/{gym_id}")
 async def get_gym(gym_id: str):
   """
   GET the details of a single gym.
   
   :param gym_id: The Id of the gym passed in as a route parameter.
   """
-  pass
+  return {"text": "hello"}
 
 
-@app.get("/gyms")
+@router.get("/gyms")
 async def get_gyms(
   city: Optional[str] = Query(None),
   country: Optional[str] = Query(None),
@@ -25,4 +26,4 @@ async def get_gyms(
   :param country: Filter gyms by country
   :param limit: Number of gyms to return
   """
-  pass
+  return {"text": "hello"}

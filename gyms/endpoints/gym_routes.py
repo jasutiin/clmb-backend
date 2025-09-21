@@ -1,8 +1,9 @@
-from main import app
-from fastapi import Query
+from fastapi import APIRouter, Query
 from typing import Optional
 
-@app.get("/gyms/{gym_id}/routes")
+router = APIRouter()
+
+@router.get("/gyms/{gym_id}/routes")
 async def get_gym_routes(
   gym_id: str,
   grade: Optional[str] = Query(None),
@@ -17,14 +18,14 @@ async def get_gym_routes(
   :param section: Filter by wall section
   :param is_active: Only return active routes
   """
-  pass
+  return {"text": "hello"}
 
 
-@app.get("/routes/{route_id}")
+@router.get("/routes/{route_id}")
 async def get_route(route_id: str):
   """
   GET the details of a single route.
   
-  :param route_id: The Id of the route passed in as a route parameter.
+  :param route_id: The Id of the route return passed in as a route parameter.
   """
-  pass
+  return {"text": "hello"}

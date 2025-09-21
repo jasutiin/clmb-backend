@@ -1,6 +1,8 @@
-from main import app
+from fastapi import APIRouter
 
-@app.get("/users/{user_id}")
+router = APIRouter()
+
+@router.get("/users/{user_id}")
 async def get_user(user_id: str):
   """
   GET the profile of a user.
@@ -8,4 +10,4 @@ async def get_user(user_id: str):
   :param user_id: The Id of the user passed in as a route parameter.
   """
   
-  pass
+  return {"text": "hello"}
