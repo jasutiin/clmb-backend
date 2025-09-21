@@ -33,7 +33,7 @@ This is the database schema. Still need to add some more things, but for now thi
 
 #### Users database
 ```
-create table user (
+create table "user" (
 	id uuid primary key default gen_random_uuid(),
 	email varchar(255) not null,
 	username varchar(64) not null,
@@ -43,7 +43,7 @@ create table user (
 	google_id varchar(255),
 	created_at timestamptz default now() not null,
 	modified_at timestamptz default now() not null
-)
+);
 
 create table climb (
 	id uuid primary key default gen_random_uuid(),
@@ -52,7 +52,7 @@ create table climb (
 	climb_notes text,
 	created_at timestamptz default now() not null,
 	modified_at timestamptz default now() not null
-)
+);
 
 create type mood_level as enum ('terrible', 'bad', 'okay', 'good', 'excellent');
 create type energy_level as enum ('exhausted', 'tired', 'average', 'energetic', 'pumped');
@@ -69,7 +69,7 @@ create table session (
 	mood_rating mood_level,
 	energy_rating energy_level,
 	modified_at timestamptz default now() not null
-)
+);
 ```
 
 #### Gyms database
