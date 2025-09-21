@@ -12,4 +12,4 @@ EXPOSE 8002
 
 # without --host flag, it defaults to local host which is not what docker uses inside the container
 # localhost: 127.0.0.1, docker0: 172.17.0.1 (according to google)
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8002"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
