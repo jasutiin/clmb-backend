@@ -61,7 +61,7 @@ create table session (
 	id uuid primary key default gen_random_uuid(),
 	user_id uuid not null,
 	gym_id uuid not null,
-	name text,
+	name varchar(64),
 	start_time timestamptz default now() not null,
 	end_time timestamptz default now(),
 	duration interval not null,
@@ -74,7 +74,50 @@ create table session (
 
 #### Gyms database
 ```
-hi
+create table grade_system (
+	id uuid primary key default gen_random_uuid(),
+	name varchar(64) not null,
+	description text,
+	created_at timestamptz default now() not null,
+	modified_at timestamptz default now() not null
+);
+
+create table gym (
+	id uuid primary key default gen_random_uuid(),
+	grade_system_id uuid not null,
+	name varchar(64) not null,
+	slug varchar(64) not null,
+	address varchar(128) not null,
+	city varchar(128) not null,
+	country varchar(64) not null,
+	latitude varchar(255) not null,
+	longitude varchar(255) not null,
+	phone varchar(32),
+	email varchar(255),
+	website varchar(128),
+	description text,
+	created_at timestamptz default now() not null,
+	modified_at timestamptz default now() not null
+);
+
+create table grade (
+	id uuid primary key default gen_random_uuid(),
+	grade_system_id uuid not null,
+	value varchar(32),
+	difficulty_order int,
+	created_at timestamptz default now() not null,
+	modified_at timestamptz default now() not null
+);
+
+create table route (
+	id uuid primary key default gen_random_uuid(),
+	gym_id uuid not null,
+	grade_id uuid not null,
+	name varchar(64),
+	colour varchar(32) not null,
+	created_at timestamptz default now() not null,
+	modified_at timestamptz default now() not null
+);
 ```
 
 ### Running the project (without docker-compose)
